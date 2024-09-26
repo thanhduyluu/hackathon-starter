@@ -50,6 +50,7 @@ const homeController = require('./controllers/home');
 const userController = require('./controllers/user');
 const apiController = require('./controllers/api');
 const contactController = require('./controllers/contact');
+const blogController = require('./controllers/blog');
 
 /**
  * API keys and Passport configuration.
@@ -112,6 +113,7 @@ app.use(lusca.xssProtection(true));
 app.disable('x-powered-by');
 app.use((req, res, next) => {
   res.locals.user = req.user;
+  res.locals._csrf = req.csrfToken(); // Add this line
   next();
 });
 app.use((req, res, next) => {
@@ -245,6 +247,17 @@ app.get('/auth/quickbooks', passport.authorize('quickbooks', { scope: ['com.intu
 app.get('/auth/quickbooks/callback', passport.authorize('quickbooks', { failureRedirect: '/login' }), (req, res) => {
   res.redirect(req.session.returnTo);
 });
+
+/**
+ * Blog routes.
+ */
+app.get('/blogs', blogController.getBlogs);
+app.get('/blogs/new', blogController.getNewBlog);
+app.post('/blogs', blogController.postNewBlog);
+app.get('/blogs/:id', blogController.getBlog);
+app.get('/blogs/:id/edit', blogController.getEditBlog);
+app.post('/blogs/:id/edit', blogController.postEditBlog);
+app.post('/blogs/:id/delete', blogController.postDeleteBlog);
 
 /**
  * Error Handler.

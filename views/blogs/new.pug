@@ -1,0 +1,19 @@
+extends ../layout
+
+block content
+  h1 Create Blog
+  .card
+    .card-body
+      form(action='/blogs', method='POST')
+        input(type='hidden', name='_csrf', value=_csrf)
+        .mb-3
+          label(for='title', class='form-label') Title
+          input(type='text', name='title', class='form-control', required)
+        .mb-3
+          label(for='content', class='form-label') Content
+          textarea(name='content', class='form-control', rows='5', required)
+        .mb-3
+          label(for='author', class='form-label') Author
+          input(type='text', name='author', class='form-control', required)
+        button(type='submit', class='btn btn-primary') Create
+  a.btn.btn-secondary.mt-3(href='/blogs') Back to Blog List

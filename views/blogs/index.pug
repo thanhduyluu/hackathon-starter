@@ -1,0 +1,16 @@
+extends ../layout
+
+block content
+  h1 Blog List
+  .row
+    each blog in blogs
+      .col-md-4
+        .card.mb-3
+          .card-body
+            h3.card-title
+              a(href=`/blogs/${blog._id}`)= blog.title
+            p.card-text= blog.content.substring(0, 100) + '...'
+            p.card-text
+              small.text-muted By #{blog.author} on #{blog.createdAt.toDateString()}
+            a.btn.btn-primary(href=`/blogs/${blog._id}`) Read More
+  a.btn.btn-primary(href='/blogs/new') Create New Blog

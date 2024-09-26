@@ -1,0 +1,14 @@
+extends ../layout
+
+block content
+  .card
+    .card-body
+      h1.card-title= blog.title
+      p.card-text= blog.content
+      p.card-text
+        small.text-muted By #{blog.author} on #{blog.createdAt.toDateString()}
+      a.btn.btn-primary(href=`/blogs/${blog._id}/edit`) Edit
+      form(action=`/blogs/${blog._id}/delete`, method='POST')
+        input(type='hidden', name='_csrf', value=_csrf)
+        button.btn.btn-danger(type='submit') Delete
+      a.btn.btn-secondary(href='/blogs') Back to Blog List
