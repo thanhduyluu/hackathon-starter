@@ -14,7 +14,8 @@
   "scripts": {
     "postinstall": "patch-package && npm run scss",
     "start": "npm run scss && node app.js",
-    "test": "nyc mocha --timeout=60000 --exit",
+    "test": "nyc --reporter=lcov --reporter=text-summary mocha  --timeout=60000 --exit",
+    "build": "webpack",
     "lint": "eslint \"**/*.js\"",
     "prepare": "if [ \"$NODE_ENV\" != \"production\" ]; then husky install; fi",
     "scss": "sass --no-source-map --load-path=./ --update ./public/css:./public/css",
@@ -90,7 +91,9 @@
     "mongodb-memory-server": "^9.0.1",
     "nyc": "^15.1.0",
     "sinon": "^16.1.0",
-    "supertest": "^6.3.3"
+    "supertest": "^6.3.3",
+    "webpack": "^5.95.0",
+    "webpack-cli": "^5.1.4"
   },
   "config": {
     "mongodbMemoryServer": {
