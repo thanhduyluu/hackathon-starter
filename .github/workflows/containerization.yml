@@ -1,6 +1,6 @@
 # This workflow will build a container image, push it to Docker Registry
 
-name: Pa
+name: Containerization
 
 on:
   push:
@@ -31,12 +31,17 @@ jobs:
     environment: Staging
     steps:
     - uses: actions/checkout@v3
+    - name: Environment variable debug
+      run: |
+        echo ${{ secrets.DOCKERHUB_USERNAME }}
+        echo ${{ secrets.DOCKERHUB_TOKEN }}
+
     - name: Build and push Docker image
       uses: docker/build-push-action@v2
       with:
         context: .
         file: ./Dockerfile
         push: true
-        tags: ${{ secrets.DOCKERHUB_USERNAME }}/hackathon-starter:latest
+        tags: ${{ secrets.DOCKERHUB_USERNAME }}/hackathon-starter:${{ github.run_number }}
         username: ${{ secrets.DOCKERHUB_USERNAME }}
         password: ${{ secrets.DOCKERHUB_TOKEN }}
