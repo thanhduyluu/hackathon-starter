@@ -41,7 +41,6 @@ jobs:
         username: ltduy24101997
         password: dckr_pat_cD5FyE0qrtVHkrDEQl0rwS8Jqdo
     - name: Login to DockerHub
-      uses: docker/login-action@v2
       run: echo "dckr_pat_cD5FyE0qrtVHkrDEQl0rwS8Jqdo" | docker login -u ltduy24101997 --password-stdin
 
     - name: Build and push Docker image
