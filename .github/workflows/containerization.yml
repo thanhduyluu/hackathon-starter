@@ -31,10 +31,10 @@ jobs:
     environment: Staging
     steps:
     - uses: actions/checkout@v3
-    - name: Environment variable debug
-      run: |
-        echo ${{ secrets.DOCKERHUB_USERNAME }}
-        echo ${{ secrets.DOCKERHUB_TOKEN }}
+#    - name: Environment variable debug
+#      run: |
+#        echo ${{ secrets.DOCKERHUB_USERNAME }}
+#        echo ${{ secrets.DOCKERHUB_TOKEN }}
 
     - name: Build and push Docker image
       uses: docker/build-push-action@v2
